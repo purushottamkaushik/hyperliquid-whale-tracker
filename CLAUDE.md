@@ -17,6 +17,9 @@ business logic yet (only the default `@SpringBootApplication` entry point and a 
 
 ## Commands
 
+For a plain-language, non-technical walkthrough of getting the app running (install Java +
+Docker, start MySQL, run the app), see `SETUP.md`.
+
 Use the Maven wrapper (`./mvnw`), not a system-installed Maven.
 
 ```bash
