@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  /* Custom (non-Tailwind-default) tokens - declared here so Tailwind generates their utility
+     classes (bg-surface-3, text-accent, etc). Values below are the dark-theme defaults; the
+     light-theme overrides further down just redeclare these same custom properties, which every
+     utility built from them already references via var(...), so no component markup changes. */
+  --color-surface-0: #0a0d12;
+  --color-surface-1: #10141b;
+  --color-surface-2: #161b24;
+  --color-surface-3: #1e2530;
+  --color-border-subtle: #232a36;
+  --color-scrollbar-thumb: var(--color-surface-3);
+
+  --color-profit: #22c55e;
+  --color-loss: #f87171;
+  --color-accent: #38bdf8;
+}
+
+/*
+ * Theming: dark is this app's established default (used unconditionally until now), so it stays
+ * the fallback for visitors with no saved preference. An explicit data-theme attribute (set by
+ * the theme toggle, persisted to localStorage) overrides that. Tailwind's own default palette
+ * (slate/violet/sky/...) ships as CSS variables too, so redeclaring the specific shades this app
+ * actually uses (see the light block below) re-themes every text-slate and violet-300 utility
+ * app-wide without touching component markup - only the roles have to mirror correctly (100 in
+ * dark, the near-white "brightest" text tone, becomes 100 in light, the near-black tone, and so
+ * on down the ramp).
+ */
+html {
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-surface-0: #f7f9fc;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #ffffff;
+  --color-surface-3: #eef2f7;
+  --color-border-subtle: #dde3ec;
+  --color-scrollbar-thumb: #cbd5e1;
+
+  --color-profit: #16a34a;
+  --color-loss: #dc2626;
+  --color-accent: #0284c7;
+
+  --color-slate-100: #0f172a;
+  --color-slate-200: #1e293b;
+  --color-slate-300: #334155;
+  --color-slate-400: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-600: #94a3b8;
+  --color-violet-300: #6d28d9;
+}
+
+body {
+  background: var(--color-surface-0);
+  color: var(--color-slate-100);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar-thumb) transparent;
+}
